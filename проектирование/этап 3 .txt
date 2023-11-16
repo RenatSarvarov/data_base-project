@@ -1,0 +1,49 @@
+create table User
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    User_name TEXT,
+    Password TEXT,
+    Email TEXT,
+    Role TEXT
+);
+create table Food_list
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    Food_name TEXT
+);
+create table Ingredient_list
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    Ingredient_name TEXT,
+    Proteins TEXT,
+    Fats TEXT,
+    Cardohydrates TEXT,
+    Calories TEXT
+);
+create table User_cart_list
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    User_id INTEGER,
+    Constraint User_id_cartFK
+    Foreign Key (User_id) references User (id) on delete cascade  
+);
+create table Cart
+(   Cart_id INTEGER ,
+    Food_id INTEGER,
+    Constraint Food_id_cartFK
+    Foreign Key (Food_id) references Food_list (id) on delete cascade,
+    Constraint cart_idFK
+    Foreign Key (cart_id) references User_cart_list (id) on delete cascade
+);
+Create table Food_recipe
+(
+    Food_id INTEGER,
+    Ingredient_id,
+    Ingredient_mass TEXT,
+    Constraint Ingredient_idFK
+    Foreign Key (Ingredient_id) references Ingredient_list (id) on delete cascade,
+    Constraint Food_id_recipeFK
+    Foreign Key (Food_id) references Food_list (id) on delete cascade
+);
+create index food_search
+on food_list (food_name)
