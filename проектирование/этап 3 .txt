@@ -45,5 +45,3 @@ Create table Food_recipe
     Constraint Food_id_recipeFK
     Foreign Key (Food_id) references Food_list (id) on delete cascade
 );
-create index food_search
-on food_list (food_name)
